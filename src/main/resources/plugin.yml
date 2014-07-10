@@ -1,0 +1,3 @@
+name: instipod-t3
+main: com.tenjava.entries.instipod.t3.TenJava
+version: '${project.version}'
