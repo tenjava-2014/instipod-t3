@@ -3,8 +3,6 @@ package com.tenjava.entries.instipod.t3.events;
 import com.tenjava.entries.instipod.t3.CallablePlayerEvent;
 import com.tenjava.entries.instipod.t3.HashtagLifeCore;
 import java.util.ArrayList;
-import org.bukkit.Effect;
-import org.bukkit.EntityEffect;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -41,11 +39,11 @@ class CatsandDogsTask extends BukkitRunnable {
             Location ofp = player.getLocation();
             ofp.add(0, HashtagLifeCore.getInstance().getConfigInt("catsanddogs.spawn-height"), 2);
             entities.add(ofp.getWorld().spawnEntity(ofp, EntityType.WOLF));
-            ofp.add(0, 0, 2);
-            entities.add(ofp.getWorld().spawnEntity(ofp, EntityType.WOLF));
-            ofp.add(0, 0, -6);
+            ofp.add(0, 0, -4);
             entities.add(ofp.getWorld().spawnEntity(ofp, EntityType.OCELOT));
-            ofp.add(0, 0, -2);
+            ofp.add(2, 0, 2);
+            entities.add(ofp.getWorld().spawnEntity(ofp, EntityType.WOLF));
+            ofp.add(-4, 0, 0);
             entities.add(ofp.getWorld().spawnEntity(ofp, EntityType.OCELOT));
         } else {
             this.cancel();
