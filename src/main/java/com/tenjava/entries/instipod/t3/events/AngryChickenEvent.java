@@ -1,7 +1,7 @@
 package com.tenjava.entries.instipod.t3.events;
 
-import com.tenjava.entries.instipod.t3.CallablePlayerEntityInteractEvent;
-import com.tenjava.entries.instipod.t3.HashtagLifeCore;
+import com.tenjava.entries.instipod.t3.api.CallablePlayerEntityInteractEvent;
+import com.tenjava.entries.instipod.t3.EventsCore;
 import org.bukkit.Material;
 import org.bukkit.entity.Chicken;
 import org.bukkit.entity.Entity;
@@ -14,8 +14,8 @@ public class AngryChickenEvent implements CallablePlayerEntityInteractEvent {
     @Override
     public void call(Player p, Entity e) throws Exception {
         if (e instanceof Chicken && !e.isDead()) {
-            HashtagLifeCore.getInstance().debug("AngryChickenAttackTask has started with target " + p.getName() + ".");
-            BukkitTask runnable = new AngryChickenAttackTask(p, e).runTaskTimer(HashtagLifeCore.getInstance(), 0, 20);
+            EventsCore.getInstance().debug("AngryChickenAttackTask has started with target " + p.getName() + ".");
+            BukkitTask runnable = new AngryChickenAttackTask(p, e).runTaskTimer(EventsCore.getInstance(), 0, 20);
         }
     }
 
@@ -38,12 +38,12 @@ class AngryChickenAttackTask extends BukkitRunnable {
     @Override
     public void run() {
         if (startTime == 0) startTime = System.currentTimeMillis();
-        long finishTime = startTime + (HashtagLifeCore.getInstance().getConfigInt("angry_chicken.event_length") * 1000);
+        long finishTime = startTime + (EventsCore.getInstance().getConfigInt("angry_chicken.event_length") * 1000);
         if ((finishTime - System.currentTimeMillis()) > 0) {
-            e.teleport(p.getLocation().add(0, HashtagLifeCore.getInstance().getConfigInt("angry_chicken.bomb_height"), 0));
+            e.teleport(p.getLocation().add(0, EventsCore.getInstance().getConfigInt("angry_chicken.bomb_height"), 0));
             e.getLocation().add(0, -2, 0).getBlock().setType(Material.ANVIL);
         } else {
-            HashtagLifeCore.getInstance().debug("AngryChickenAttackTask has finished.");
+            EventsCore.getInstance().debug("AngryChickenAttackTask has finished.");
             this.cancel();
         }
     }

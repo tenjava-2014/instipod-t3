@@ -6,8 +6,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
-public class HashtagLifeCore extends JavaPlugin {
-    private static HashtagLifeCore instance;
+public class EventsCore extends JavaPlugin {
+    private static EventsCore instance;
     private EventRegistrar registrar;
     private FileConfiguration configuration;
     
@@ -50,7 +50,7 @@ public class HashtagLifeCore extends JavaPlugin {
         }
     }
     
-    public static HashtagLifeCore getInstance() {
+    public static EventsCore getInstance() {
         return instance;
     }
     

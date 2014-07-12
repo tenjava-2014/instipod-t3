@@ -1,5 +1,8 @@
 package com.tenjava.entries.instipod.t3;
 
+import com.tenjava.entries.instipod.t3.api.CallablePlayerHungerEvent;
+import com.tenjava.entries.instipod.t3.api.CallablePlayerEvent;
+import com.tenjava.entries.instipod.t3.api.CallablePlayerEntityInteractEvent;
 import com.tenjava.entries.instipod.t3.events.AngryChickenEvent;
 import com.tenjava.entries.instipod.t3.events.CatsandDogsEvent;
 import com.tenjava.entries.instipod.t3.events.LightningRedstoneEvent;
@@ -25,21 +28,21 @@ public class EventRegistrar {
     }
     
     public void initEvents() {
-        if (HashtagLifeCore.getInstance().getConfigBoolean("lightning_redstone.enabled")) 
-            stormEvents.put(new LightningRedstoneEvent(), (100 - HashtagLifeCore.getInstance().getConfigInt("lightning_redstone.chance")));
-        if (HashtagLifeCore.getInstance().getConfigBoolean("cats_and_dogs.enabled")) 
-            stormEvents.put(new CatsandDogsEvent(), (100 - HashtagLifeCore.getInstance().getConfigInt("cats_and_dogs.chance")));
-        if (HashtagLifeCore.getInstance().getConfigBoolean("angry_chicken.enabled")) 
-            entityEvents.put(new AngryChickenEvent(), (100 - HashtagLifeCore.getInstance().getConfigInt("angry_chicken.chance")));
-        if (HashtagLifeCore.getInstance().getConfigBoolean("vomit.enabled")) 
-            hungerEvents.put(new VomitEvent(), (100 - HashtagLifeCore.getInstance().getConfigInt("vomit.chance")));
+        if (EventsCore.getInstance().getConfigBoolean("lightning_redstone.enabled")) 
+            stormEvents.put(new LightningRedstoneEvent(), (100 - EventsCore.getInstance().getConfigInt("lightning_redstone.chance")));
+        if (EventsCore.getInstance().getConfigBoolean("cats_and_dogs.enabled")) 
+            stormEvents.put(new CatsandDogsEvent(), (100 - EventsCore.getInstance().getConfigInt("cats_and_dogs.chance")));
+        if (EventsCore.getInstance().getConfigBoolean("angry_chicken.enabled")) 
+            entityEvents.put(new AngryChickenEvent(), (100 - EventsCore.getInstance().getConfigInt("angry_chicken.chance")));
+        if (EventsCore.getInstance().getConfigBoolean("vomit.enabled")) 
+            hungerEvents.put(new VomitEvent(), (100 - EventsCore.getInstance().getConfigInt("vomit.chance")));
     }
     
     public void callStormEvent(CallablePlayerEvent event, Player p) {
         try {
             event.call(p);
         } catch (Exception ex) {
-            HashtagLifeCore.getInstance().log(Level.WARNING, "Failed to execute event callable: " + event.toString() + "!");
+            EventsCore.getInstance().log(Level.WARNING, "Failed to execute event callable: " + event.toString() + "!");
         }
     }
     
@@ -47,7 +50,7 @@ public class EventRegistrar {
         try {
             event.call(p, hunger);
         } catch (Exception ex) {
-            HashtagLifeCore.getInstance().log(Level.WARNING, "Failed to execute event callable: " + event.toString() + "!");
+            EventsCore.getInstance().log(Level.WARNING, "Failed to execute event callable: " + event.toString() + "!");
         }
     }
     
@@ -55,7 +58,7 @@ public class EventRegistrar {
         try {
             event.call(p, e);
         } catch (Exception ex) {
-            HashtagLifeCore.getInstance().log(Level.WARNING, "Failed to execute event callable: " + event.toString() + "!");
+            EventsCore.getInstance().log(Level.WARNING, "Failed to execute event callable: " + event.toString() + "!");
         }
     }
     
@@ -65,11 +68,11 @@ public class EventRegistrar {
             for (CallablePlayerEvent event : stormEvents.keySet()) {
                 int chance = random.nextInt(100) + 1;
                 if (chance >= stormEvents.get(event)) {
-                    HashtagLifeCore.getInstance().debug("World " + p.getWorld().getName() + ": Executing event " + event.getEventName() + " on player " + p.getName() + ", result " + chance + " needed " + stormEvents.get(event) + ".");
-                    HashtagLifeCore.getInstance().logEvent("Player " + p.getName() + " in world " + p.getWorld().getName() + ", executing event " + event.getEventName() + ".");
+                    EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": Executing event " + event.getEventName() + " on player " + p.getName() + ", result " + chance + " needed " + stormEvents.get(event) + ".");
+                    EventsCore.getInstance().logEvent("Player " + p.getName() + " in world " + p.getWorld().getName() + ", executing event " + event.getEventName() + ".");
                     callStormEvent(event, p);
                 } else {
-                    HashtagLifeCore.getInstance().debug("World " + p.getWorld().getName() + ": Skipping event " + event.getEventName() + " on player " + p.getName() + ", result " + chance + " needed " + stormEvents.get(event) + ".");
+                    EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": Skipping event " + event.getEventName() + " on player " + p.getName() + ", result " + chance + " needed " + stormEvents.get(event) + ".");
                 }
             }
         }
@@ -80,11 +83,11 @@ public class EventRegistrar {
         for (CallablePlayerHungerEvent event : hungerEvents.keySet()) {
             int chance = random.nextInt(100) + 1;
             if (chance >= hungerEvents.get(event)) {
-                HashtagLifeCore.getInstance().debug("World " + p.getWorld().getName() + ": Executing event " + event.getEventName() + " on player " + p.getName() + ", result " + chance + " needed " + hungerEvents.get(event) + ".");
-                HashtagLifeCore.getInstance().logEvent("Player " + p.getName() + " in world " + p.getWorld().getName() + ", executing event " + event.getEventName() + ".");
+                EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": Executing event " + event.getEventName() + " on player " + p.getName() + ", result " + chance + " needed " + hungerEvents.get(event) + ".");
+                EventsCore.getInstance().logEvent("Player " + p.getName() + " in world " + p.getWorld().getName() + ", executing event " + event.getEventName() + ".");
                 callHungerEvent(event, p, hunger);
             } else {
-                HashtagLifeCore.getInstance().debug("World " + p.getWorld().getName() + ": Skipping event " + event.getEventName() + " on player " + p.getName() + ", result " + chance + " needed " + hungerEvents.get(event) + ".");
+                EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": Skipping event " + event.getEventName() + " on player " + p.getName() + ", result " + chance + " needed " + hungerEvents.get(event) + ".");
             }
         }
     }
@@ -94,11 +97,11 @@ public class EventRegistrar {
         for (CallablePlayerEntityInteractEvent event : entityEvents.keySet()) {
             int chance = random.nextInt(100) + 1;
             if (chance >= entityEvents.get(event)) {
-                HashtagLifeCore.getInstance().debug("World " + p.getWorld().getName() + ": Executing event " + event.getEventName() + " on player " + p.getName() + ", result " + chance + " needed " + entityEvents.get(event) + ".");
-                HashtagLifeCore.getInstance().logEvent("Player " + p.getName() + " in world " + p.getWorld().getName() + ", executing event " + event.getEventName() + ".");
+                EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": Executing event " + event.getEventName() + " on player " + p.getName() + ", result " + chance + " needed " + entityEvents.get(event) + ".");
+                EventsCore.getInstance().logEvent("Player " + p.getName() + " in world " + p.getWorld().getName() + ", executing event " + event.getEventName() + ".");
                 callEntityEvent(event, p, e);
             } else {
-                HashtagLifeCore.getInstance().debug("World " + p.getWorld().getName() + ": Skipping event " + event.getEventName() + " on player " + p.getName() + ", result " + chance + " needed " + entityEvents.get(event) + ".");
+                EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": Skipping event " + event.getEventName() + " on player " + p.getName() + ", result " + chance + " needed " + entityEvents.get(event) + ".");
             }
         }
     }

@@ -1,7 +1,7 @@
 package com.tenjava.entries.instipod.t3.events;
 
-import com.tenjava.entries.instipod.t3.CallablePlayerHungerEvent;
-import com.tenjava.entries.instipod.t3.HashtagLifeCore;
+import com.tenjava.entries.instipod.t3.api.CallablePlayerHungerEvent;
+import com.tenjava.entries.instipod.t3.EventsCore;
 import java.util.ArrayList;
 import org.bukkit.Material;
 import org.bukkit.entity.Item;
@@ -17,13 +17,13 @@ public class VomitEvent implements CallablePlayerHungerEvent {
     
     @Override
     public void call(Player p, int hunger) throws Exception {
-        if (hunger <= HashtagLifeCore.getInstance().getConfigInt("vomit.hunger_level") && !players.contains(p.getName())) {
-            PotionEffect ourweakness = new PotionEffect(PotionEffectType.WEAKNESS, (HashtagLifeCore.getInstance().getConfigInt("vomit.event_length") * 20), HashtagLifeCore.getInstance().getConfigInt("vomit.event_strength"));
-            PotionEffect sickness = new PotionEffect(PotionEffectType.HUNGER, (HashtagLifeCore.getInstance().getConfigInt("vomit.event_length") * 20), HashtagLifeCore.getInstance().getConfigInt("vomit.event_strength"));
+        if (hunger <= EventsCore.getInstance().getConfigInt("vomit.hunger_level") && !players.contains(p.getName())) {
+            PotionEffect ourweakness = new PotionEffect(PotionEffectType.WEAKNESS, (EventsCore.getInstance().getConfigInt("vomit.event_length") * 20), EventsCore.getInstance().getConfigInt("vomit.event_strength"));
+            PotionEffect sickness = new PotionEffect(PotionEffectType.HUNGER, (EventsCore.getInstance().getConfigInt("vomit.event_length") * 20), EventsCore.getInstance().getConfigInt("vomit.event_strength"));
             p.addPotionEffect(ourweakness);
             p.addPotionEffect(sickness);
-            BukkitTask runnable = new VomitAttackTask(p).runTaskTimer(HashtagLifeCore.getInstance(), 0, 3);
-            HashtagLifeCore.getInstance().debug("World " + p.getWorld().getName() + ": VomitEvent for player " + p.getName() + ", started task.");
+            BukkitTask runnable = new VomitAttackTask(p).runTaskTimer(EventsCore.getInstance(), 0, 3);
+            EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": VomitEvent for player " + p.getName() + ", started task.");
             players.add(p.getName());
         }
     }
@@ -45,12 +45,12 @@ class VomitAttackTask extends BukkitRunnable {
     @Override
     public void run() {
         if (startTime == 0) startTime = System.currentTimeMillis();
-        long finishTime = startTime + (HashtagLifeCore.getInstance().getConfigInt("vomit.event_length") * 1000);
-        if ((finishTime - System.currentTimeMillis()) > 0 && p.getFoodLevel() <= HashtagLifeCore.getInstance().getConfigInt("vomit.hunger_level")) {
+        long finishTime = startTime + (EventsCore.getInstance().getConfigInt("vomit.event_length") * 1000);
+        if ((finishTime - System.currentTimeMillis()) > 0 && p.getFoodLevel() <= EventsCore.getInstance().getConfigInt("vomit.hunger_level")) {
             Item dropped = p.getWorld().dropItem(p.getEyeLocation(), new ItemStack(Material.DIRT, 1));
             dropped.setVelocity(p.getEyeLocation().getDirection().normalize());
         } else {
-            HashtagLifeCore.getInstance().debug("World " + p.getWorld().getName() + ": VomitEvent for player " + p.getName() + ", finished task.");
+            EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": VomitEvent for player " + p.getName() + ", finished task.");
             VomitEvent.players.remove(p.getName());
             this.cancel();
         }

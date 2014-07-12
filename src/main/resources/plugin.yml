@@ -1,4 +1,4 @@
-name: HashtagLife
-main: com.tenjava.entries.instipod.t3.HashtagLifeCore
+name: InstiEvents
+main: com.tenjava.entries.instipod.t3.EventsCore
 version: '${project.version}'
 description: instipod's plugin

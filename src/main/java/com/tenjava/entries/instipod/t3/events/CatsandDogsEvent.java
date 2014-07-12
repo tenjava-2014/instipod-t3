@@ -1,7 +1,7 @@
 package com.tenjava.entries.instipod.t3.events;
 
-import com.tenjava.entries.instipod.t3.CallablePlayerEvent;
-import com.tenjava.entries.instipod.t3.HashtagLifeCore;
+import com.tenjava.entries.instipod.t3.api.CallablePlayerEvent;
+import com.tenjava.entries.instipod.t3.EventsCore;
 import java.util.ArrayList;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -16,8 +16,8 @@ public class CatsandDogsEvent implements CallablePlayerEvent {
     public void call(Player p) throws Exception {
         Location ofp = p.getLocation();
         if (ofp.getWorld().hasStorm()) {
-            BukkitTask runnable = new CatsandDogsTask(p).runTaskTimer(HashtagLifeCore.getInstance(), 0, 20);
-            HashtagLifeCore.getInstance().debug("World " + p.getWorld().getName() + ": CatsandDogsEvent for player " + p.getName() + ", started task.");
+            BukkitTask runnable = new CatsandDogsTask(p).runTaskTimer(EventsCore.getInstance(), 0, 20);
+            EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": CatsandDogsEvent for player " + p.getName() + ", started task.");
         }
     }
 
@@ -39,10 +39,10 @@ class CatsandDogsTask extends BukkitRunnable {
     @Override
     public void run() {
         if (startTime == 0) startTime = System.currentTimeMillis();
-        long finishTime = startTime + (HashtagLifeCore.getInstance().getConfigInt("cats_and_dogs.event_length") * 1000);
+        long finishTime = startTime + (EventsCore.getInstance().getConfigInt("cats_and_dogs.event_length") * 1000);
         if ((finishTime - System.currentTimeMillis()) > 0 && player.getWorld().hasStorm()) {
             Location ofp = player.getLocation();
-            ofp.add(0, HashtagLifeCore.getInstance().getConfigInt("cats_and_dogs.spawn_height"), 2);
+            ofp.add(0, EventsCore.getInstance().getConfigInt("cats_and_dogs.spawn_height"), 2);
             entities.add(ofp.getWorld().spawnEntity(ofp, EntityType.WOLF));
             ofp.add(0, 0, -4);
             entities.add(ofp.getWorld().spawnEntity(ofp, EntityType.OCELOT));
@@ -52,7 +52,7 @@ class CatsandDogsTask extends BukkitRunnable {
             entities.add(ofp.getWorld().spawnEntity(ofp, EntityType.OCELOT));
         } else {
             this.cancel();
-            HashtagLifeCore.getInstance().debug("World " + player.getWorld().getName() + ": CatsandDogsEvent for player " + player.getName() + ", finshed task.");
+            EventsCore.getInstance().debug("World " + player.getWorld().getName() + ": CatsandDogsEvent for player " + player.getName() + ", finshed task.");
             for (Entity e : entities) {
                 try {
                     e.remove();

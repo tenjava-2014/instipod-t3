@@ -1,7 +1,7 @@
 package com.tenjava.entries.instipod.t3.events;
 
-import com.tenjava.entries.instipod.t3.CallablePlayerEvent;
-import com.tenjava.entries.instipod.t3.HashtagLifeCore;
+import com.tenjava.entries.instipod.t3.api.CallablePlayerEvent;
+import com.tenjava.entries.instipod.t3.EventsCore;
 import java.util.ArrayList;
 import java.util.Random;
 import org.bukkit.Location;
@@ -15,12 +15,12 @@ public class LightningRedstoneEvent implements CallablePlayerEvent {
 
     @Override
     public void call(Player p) throws Exception {
-        HashtagLifeCore plugin = HashtagLifeCore.getInstance();
+        EventsCore plugin = EventsCore.getInstance();
         Location ofplayer = p.getLocation();
         if (ofplayer.getWorld().hasStorm()) {
             ArrayList<Block> blocks = getPossibleBlocks(ofplayer.getBlock(), 25);
             if (blocks.size() > 0) {
-                HashtagLifeCore.getInstance().debug("World " + p.getWorld().getName() + ": LightningRedstoneEvent for player " + p.getName() + ", found " + blocks.size() + " possible targets.");
+                EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": LightningRedstoneEvent for player " + p.getName() + ", found " + blocks.size() + " possible targets.");
                 Random random = new Random();
                 int tostrike = random.nextInt(blocks.size());
                 Block strike = blocks.get(tostrike);
@@ -32,10 +32,10 @@ public class LightningRedstoneEvent implements CallablePlayerEvent {
                     public void run() {
                         LightningRedstoneEvent.removeStruck();
                     }
-                }.runTaskLater(HashtagLifeCore.getInstance(), 20);
-                HashtagLifeCore.getInstance().debug("World " + p.getWorld().getName() + ": LightningRedstoneEvent for player " + p.getName() + ", executed.");
+                }.runTaskLater(EventsCore.getInstance(), 20);
+                EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": LightningRedstoneEvent for player " + p.getName() + ", executed.");
             } else {
-                HashtagLifeCore.getInstance().debug("World " + p.getWorld().getName() + ": LightningRedstoneEvent for player " + p.getName() + ", found 0 possible targets.");
+                EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": LightningRedstoneEvent for player " + p.getName() + ", found 0 possible targets.");
             }
         }
     }
@@ -94,8 +94,8 @@ public class LightningRedstoneEvent implements CallablePlayerEvent {
         Random random = new Random();
         int result = random.nextInt(100) + 1;
         struck.setType(Material.REDSTONE_WIRE);
-        if (result >= (100 - HashtagLifeCore.getInstance().getConfigInt("lightning_redstone.overload_chance"))) {
-            float power = HashtagLifeCore.getInstance().getConfigInt("lightning_redstone.overload_power") * 1F;
+        if (result >= (100 - EventsCore.getInstance().getConfigInt("lightning_redstone.overload_chance"))) {
+            float power = EventsCore.getInstance().getConfigInt("lightning_redstone.overload_power") * 1F;
             struck.getWorld().createExplosion(struck.getLocation().getBlockX(), struck.getLocation().getBlockY(), struck.getLocation().getBlockZ(), power, true, true);
         }
         struck = null;

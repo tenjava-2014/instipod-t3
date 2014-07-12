@@ -1,7 +1,7 @@
 package com.tenjava.entries.instipod.t3;
 
 import com.tenjava.entries.instipod.t3.EventRegistrar;
-import com.tenjava.entries.instipod.t3.HashtagLifeCore;
+import com.tenjava.entries.instipod.t3.EventsCore;
 import java.util.Random;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -21,13 +21,13 @@ public class WeatherRunnable extends BukkitRunnable {
             if (world.getPlayers().size() > 0) {
                 int luckyplayer = random.nextInt(world.getPlayers().size());
                 Player tostrike = world.getPlayers().get(luckyplayer);
-                HashtagLifeCore.getInstance().debug("World " + world.getName() + ": Selected " + tostrike.getName() + " for random weather events.");
+                EventsCore.getInstance().debug("World " + world.getName() + ": Selected " + tostrike.getName() + " for random weather events.");
                 EventRegistrar.getInstance().doStormEvents(tostrike);
             } else {
-                HashtagLifeCore.getInstance().debug("There are no players in world " + world.getName() + ", so skipping task.");
+                EventsCore.getInstance().debug("There are no players in world " + world.getName() + ", so skipping task.");
             }
         } else {
-            HashtagLifeCore.getInstance().debug("World " + world.getName() + " has stopped storming, so canceling task.");
+            EventsCore.getInstance().debug("World " + world.getName() + " has stopped storming, so canceling task.");
             this.cancel();
         }
     }

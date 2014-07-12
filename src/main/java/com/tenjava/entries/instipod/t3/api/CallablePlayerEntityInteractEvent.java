@@ -1,4 +1,4 @@
-package com.tenjava.entries.instipod.t3;
+package com.tenjava.entries.instipod.t3.api;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
