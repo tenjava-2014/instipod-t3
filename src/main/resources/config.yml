@@ -1,8 +1,9 @@
 debug: false
-lightningredstone:
-    enabled: true
+global:
     try-frequency: 600
     start-delay: 200
+lightningredstone:
+    enabled: true
     run-chance: 10
     overload-chance: 100
     overload-power: 3

@@ -26,7 +26,7 @@ public class HashtagLifeCore extends JavaPlugin {
         
         for (World w : getServer().getWorlds()) {
             debug("World " + w.getName() + " is already storming, starting Bukkit Task.");
-            BukkitTask runnable = new WeatherRunnable(w).runTaskTimer(this, getConfigInt("lightningredstone.start-delay"), getConfigInt("lightningredstone.try-frequency"));
+            BukkitTask runnable = new WeatherRunnable(w).runTaskTimer(this, getConfigInt("global.start-delay"), getConfigInt("global.try-frequency"));
         }
     }
     
