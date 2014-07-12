@@ -1,0 +1,6 @@
+debug: true
+lightningredstone:
+    try-frequency: 600
+    start-delay: 200
+    run-chance: 101
+    overload-chance: 101

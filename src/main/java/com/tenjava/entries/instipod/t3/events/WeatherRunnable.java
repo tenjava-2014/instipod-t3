@@ -1,6 +1,7 @@
 package com.tenjava.entries.instipod.t3.events;
 
 import com.tenjava.entries.instipod.t3.EventRegistrar;
+import com.tenjava.entries.instipod.t3.HashtagLifeCore;
 import java.util.Random;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -15,12 +16,16 @@ public class WeatherRunnable extends BukkitRunnable {
     
     @Override
     public void run() {
-        System.out.println("debug//runnable executing");
         if (world.hasStorm()) {
             Random random = new Random();
-            int luckyplayer = random.nextInt(world.getPlayers().size());
-            Player tostrike = world.getPlayers().get(luckyplayer);
-            EventRegistrar.getInstance().doStormEvents(tostrike);
+            if (world.getPlayers().size() > 0) {
+                int luckyplayer = random.nextInt(world.getPlayers().size());
+                Player tostrike = world.getPlayers().get(luckyplayer);
+                HashtagLifeCore.getInstance().debug("World " + world.getName() + ": Selected " + tostrike.getName() + " for random weather events.");
+                EventRegistrar.getInstance().doStormEvents(tostrike);
+            } else {
+                HashtagLifeCore.getInstance().debug("There are no players in world " + world.getName() + ", so skipping task.");
+            }
         } else {
             this.cancel();
         }

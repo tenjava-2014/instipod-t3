@@ -37,7 +37,7 @@ public class EventListener implements Listener {
     @EventHandler(priority = EventPriority.NORMAL)
     public void onWeatherChange(WeatherChangeEvent event) {
         if (event.toWeatherState()) {
-            System.out.println("debug//weather state has changed to true");
+            HashtagLifeCore.getInstance().debug("World " + event.getWorld().getName() + " has started storming, starting Bukkit Task.");
             BukkitTask runnable = new WeatherRunnable(event.getWorld()).runTaskTimer(plugin, 100, 600);
         }
     }

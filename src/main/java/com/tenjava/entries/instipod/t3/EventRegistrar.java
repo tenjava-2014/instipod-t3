@@ -19,7 +19,7 @@ public class EventRegistrar {
     }
     
     public void initEvents() {
-        stormEvents.put(new LightningRedstoneEvent(), 101);
+        stormEvents.put(new LightningRedstoneEvent(), 0);
     }
     
     public void callEvent(CallablePlayerEvent event, Player p) {
@@ -33,10 +33,10 @@ public class EventRegistrar {
     public void doStormEvents(Player p) {
         if (p.getWorld().hasStorm()) {
             Random random = new Random();
-            System.out.println("debug//testing events");
             for (CallablePlayerEvent event : stormEvents.keySet()) {
                 int chance = random.nextInt(100) + 1;
                 if (chance >= stormEvents.get(event)) {
+                    HashtagLifeCore.getInstance().debug("World " + p.getWorld().getName() + ": Executing event " + event.toString() + "on player " + p.getName() + ".");
                     callEvent(event, p);
                 }
             }

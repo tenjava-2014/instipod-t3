@@ -19,9 +19,8 @@ public class LightningRedstoneEvent implements CallablePlayerEvent {
         Location ofplayer = p.getLocation();
         if (ofplayer.getWorld().hasStorm()) {
             ArrayList<Block> blocks = getPossibleBlocks(ofplayer.getBlock(), 25);
-            blocks.addAll(getPossibleBlocks(ofplayer.getBlock(), -25));
             if (blocks.size() > 0) {
-                p.sendMessage("debug//" + blocks.size() + " possible targets found");
+                HashtagLifeCore.getInstance().debug("World " + p.getWorld().getName() + ": LightningRedstoneEvent for player " + p.getName() + ", found " + blocks.size() + " possible targets.");
                 Random random = new Random();
                 int tostrike = random.nextInt(blocks.size());
                 Block strike = blocks.get(tostrike);
@@ -34,8 +33,9 @@ public class LightningRedstoneEvent implements CallablePlayerEvent {
                         LightningRedstoneEvent.removeStruck();
                     }
                 }.runTaskLater(HashtagLifeCore.getInstance(), 20);
+                HashtagLifeCore.getInstance().debug("World " + p.getWorld().getName() + ": LightningRedstoneEvent for player " + p.getName() + ", executed.");
             } else {
-                p.sendMessage("debug// no targets found");
+                HashtagLifeCore.getInstance().debug("World " + p.getWorld().getName() + ": LightningRedstoneEvent for player " + p.getName() + ", found 0 possible targets.");
             }
         }
     }
@@ -59,6 +59,24 @@ public class LightningRedstoneEvent implements CallablePlayerEvent {
             }
             y = 0;
             x++;
+        }
+        x = 0;
+        y = 0;
+        z = 0;
+        while (x >= (-1 * radius)) {
+            while (y >= (-1 * radius)) {
+                while (z >= (-1 * radius)) {
+                    Block b = starting.getRelative(x, y, z);
+                    if (b.getType().equals(Material.REDSTONE_WIRE)) {
+                        output.add(b);
+                    }
+                    z--;
+                }
+                z = 0;
+                y--;
+            }
+            y = 0;
+            x--;
         }
         return output;
     }
