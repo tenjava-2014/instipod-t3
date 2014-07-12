@@ -1,5 +1,6 @@
 package com.tenjava.entries.instipod.t3;
 
+import com.tenjava.entries.instipod.t3.events.CatsandDogsEvent;
 import com.tenjava.entries.instipod.t3.events.LightningRedstoneEvent;
 import java.util.HashMap;
 import java.util.Random;
@@ -21,6 +22,8 @@ public class EventRegistrar {
     public void initEvents() {
         if (HashtagLifeCore.getInstance().getConfigBoolean("lightningredstone.enabled")) 
             stormEvents.put(new LightningRedstoneEvent(), (100 - HashtagLifeCore.getInstance().getConfigInt("lightningredstone.run-chance")));
+        if (HashtagLifeCore.getInstance().getConfigBoolean("catsanddogs.enabled")) 
+            stormEvents.put(new CatsandDogsEvent(), (100 - HashtagLifeCore.getInstance().getConfigInt("catsanddogs.run-chance")));
     }
     
     public void callEvent(CallablePlayerEvent event, Player p) {

@@ -6,3 +6,8 @@ lightningredstone:
     run-chance: 100
     overload-chance: 100
     overload-power: 3
+catsanddogs:
+    enabled: true
+    run-chance: 100
+    event-length: 10
+    spawn-height: 30
