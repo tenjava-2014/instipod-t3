@@ -41,7 +41,7 @@ public class HashtagLifeCore extends JavaPlugin {
     
     public void debug(String message) {
         if (isDebug()) {
-            log(Level.INFO, message);
+            log(Level.INFO, "[D] " + message);
         }
     }
     
