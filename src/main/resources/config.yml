@@ -1,5 +1,7 @@
 debug: false
 log_events: true
+use_permissions: false
+op_has_all_perms: true
 global:
     frequency: 600
     start_delay: 200

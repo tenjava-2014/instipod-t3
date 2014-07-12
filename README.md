@@ -29,9 +29,13 @@ Features
 --------
 
 - During a storm, lightning has a chance to hit nearby redstone wire and cause a (unwanted?) pulse.
+  * Permission: instievents.event.LightningRedstoneEvent
 - During a storm, there is a chance it can start raining "Cats and Dogs."
+  * Permission: instievents.event.CatsandDogsEvent
 - Hitting a chicken might anger it enough to start bombing you with anvils.
+  * Permission: instievents.event.AngryChickenEvent
 - Running out of food might cause you to start vomiting dirt everywhere.
+  * Permission: instievents.event.VomitEvent
   * Restoring your food level above the set level will stop the effect
 - An open API for more events!
   * Scroll down to see the developer documentation!
@@ -40,7 +44,10 @@ Plugin Usage
 ------------
 
 After installing the plugin JAR in your server's plugins folder, no extra work is required.  The plugin will load default values in the configuration file, which should set you up with random events right away!
-If you want to customize some of the event factors, they are provided in the config.yml file created on first server run.  Below is information on each of the configuration options:
+By default, permissions are disabled to offer drop-and-play functionality.  If you want to use permissions, edit the config.yml file.
+If you want to customize some of the event factors, they are provided in the config.yml file created on first server run.  
+
+Below is information on each of the configuration options:
 
 ```
 debug: false
@@ -51,6 +58,16 @@ This is a boolean entry mostly for me (the plugin author) to show plugin debuggi
 log_events: true
 ```
 This is a boolean entry that controls whether the plugin should log to the console whenever a random event occurs.
+
+```
+use_permissions: false
+```
+This is a boolean entry that controls whether the plugin should restrict events to the players that have permissions for them.
+
+```
+op_has_all_perms: true
+```
+This is a boolean entry that controls when using permissions, if a server op has all permissions.
 
 
 ### Global Section

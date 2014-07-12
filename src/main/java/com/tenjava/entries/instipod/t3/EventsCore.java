@@ -3,6 +3,7 @@ package com.tenjava.entries.instipod.t3;
 import java.util.logging.Level;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -95,5 +96,23 @@ public class EventsCore extends JavaPlugin {
      */
     public boolean isDebug() {
         return this.getConfigBoolean("debug");
+    }
+    
+    /**
+     * Returns if the player has permission
+     * @param p the player to check
+     * @param node the permission to check
+     * @return boolean if player has permission
+     */
+    public boolean hasPerm(Player p, String node) {
+        if (getConfigBoolean("op_has_all_perms")) {
+            if (p.isOp()) {
+                return true;
+            }
+        }
+        if (!getConfigBoolean("use_permissions")) {
+            return true;
+        }
+        return p.hasPermission(node);
     }
 }

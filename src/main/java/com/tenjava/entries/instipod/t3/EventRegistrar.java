@@ -168,9 +168,13 @@ public class EventRegistrar {
             for (CallablePlayerEvent event : stormEvents.keySet()) {
                 int chance = Utils.getRandom(1, 100);
                 if (chance >= stormEvents.get(event)) {
-                    EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": Executing event " + event.getEventName() + " on player " + p.getName() + ", result " + chance + " needed " + stormEvents.get(event) + ".");
-                    EventsCore.getInstance().logEvent("Player " + p.getName() + " in world " + p.getWorld().getName() + ", executing event " + event.getEventName() + ".");
-                    callStormEvent(event, p);
+                    if (EventsCore.getInstance().hasPerm(p, "instievents.event." + event.getEventName())) {
+                        EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": Executing event " + event.getEventName() + " on player " + p.getName() + ", result " + chance + " needed " + stormEvents.get(event) + ".");
+                        EventsCore.getInstance().logEvent("Player " + p.getName() + " in world " + p.getWorld().getName() + ", executing event " + event.getEventName() + ".");
+                        callStormEvent(event, p);
+                    } else {
+                        EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": Skipping event " + event.getEventName() + " on player " + p.getName() + ", didn't have permission.");
+                    }
                 } else {
                     EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": Skipping event " + event.getEventName() + " on player " + p.getName() + ", result " + chance + " needed " + stormEvents.get(event) + ".");
                 }
@@ -187,9 +191,13 @@ public class EventRegistrar {
         for (CallablePlayerHungerEvent event : hungerEvents.keySet()) {
             int chance = Utils.getRandom(1, 100);
             if (chance >= hungerEvents.get(event)) {
-                EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": Executing event " + event.getEventName() + " on player " + p.getName() + ", result " + chance + " needed " + hungerEvents.get(event) + ".");
-                EventsCore.getInstance().logEvent("Player " + p.getName() + " in world " + p.getWorld().getName() + ", executing event " + event.getEventName() + ".");
-                callHungerEvent(event, p, hunger);
+                if (EventsCore.getInstance().hasPerm(p, "instievents.event." + event.getEventName())) {
+                    EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": Executing event " + event.getEventName() + " on player " + p.getName() + ", result " + chance + " needed " + hungerEvents.get(event) + ".");
+                    EventsCore.getInstance().logEvent("Player " + p.getName() + " in world " + p.getWorld().getName() + ", executing event " + event.getEventName() + ".");
+                    callHungerEvent(event, p, hunger);
+                } else {
+                    EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": Skipping event " + event.getEventName() + " on player " + p.getName() + ", didn't have permission.");
+                }
             } else {
                 EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": Skipping event " + event.getEventName() + " on player " + p.getName() + ", result " + chance + " needed " + hungerEvents.get(event) + ".");
             }
@@ -205,9 +213,13 @@ public class EventRegistrar {
         for (CallablePlayerEntityInteractEvent event : entityEvents.keySet()) {
             int chance = Utils.getRandom(1, 100);
             if (chance >= entityEvents.get(event)) {
-                EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": Executing event " + event.getEventName() + " on player " + p.getName() + ", result " + chance + " needed " + entityEvents.get(event) + ".");
-                EventsCore.getInstance().logEvent("Player " + p.getName() + " in world " + p.getWorld().getName() + ", executing event " + event.getEventName() + ".");
-                callEntityEvent(event, p, e);
+                if (EventsCore.getInstance().hasPerm(p, "instievents.event." + event.getEventName())) {
+                    EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": Executing event " + event.getEventName() + " on player " + p.getName() + ", result " + chance + " needed " + entityEvents.get(event) + ".");
+                    EventsCore.getInstance().logEvent("Player " + p.getName() + " in world " + p.getWorld().getName() + ", executing event " + event.getEventName() + ".");
+                    callEntityEvent(event, p, e);
+                } else {
+                    EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": Skipping event " + event.getEventName() + " on player " + p.getName() + ", didn't have permission.");
+                }
             } else {
                 EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": Skipping event " + event.getEventName() + " on player " + p.getName() + ", result " + chance + " needed " + entityEvents.get(event) + ".");
             }
