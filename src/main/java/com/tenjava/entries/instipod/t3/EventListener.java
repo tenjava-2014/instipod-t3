@@ -4,6 +4,7 @@ import com.tenjava.entries.instipod.t3.events.LightningRedstoneEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockRedstoneEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 public class EventListener implements Listener {
@@ -28,5 +29,12 @@ public class EventListener implements Listener {
             event.setCancelled(true);
         }
         
+    }
+    
+    @EventHandler(priority = EventPriority.LOW)
+    public void onBlockRedstoneEvent(BlockRedstoneEvent event) {
+        if (LightningRedstoneEvent.isBlockStruck(event.getBlock())) {
+            //event.setNewCurrent(15);
+        }
     }
 }
