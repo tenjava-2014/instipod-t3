@@ -34,35 +34,66 @@ public class EventsCore extends JavaPlugin {
         
     }
     
+    /**
+     * Logs a message to the console with plugin name prefix
+     * @param level the severity level of the message
+     * @param message the message text
+     */
     public void log(Level level, String message) {
         getServer().getLogger().log(level, "[" + getDescription().getName() + "] " + message);
     }
     
+    /**
+     * Logs a message to the console when log_events is enabled
+     * @param message the message text
+     */
     public void logEvent(String message) {
         if (getConfigBoolean("log_events")) {
             log(Level.INFO, "[E] " + message);
         }
     }
     
+    /**
+     * Logs a message to the console when debug is enabled
+     * @param message the message text
+     */
     public void debug(String message) {
         if (isDebug()) {
             log(Level.INFO, "[D] " + message);
         }
     }
     
+    /**
+     * Returns the current plugin instance
+     * @return plugin instance
+     */
     public static EventsCore getInstance() {
         return instance;
     }
     
+    /**
+     * Returns an integer from the configuration file
+     * @param path the path to the entry in the configuration file
+     * @return integer from configuration file
+     */
     public int getConfigInt(String path) {
         return configuration.getInt(path);
     }
     
+    /**
+     * Returns a boolean from the configuration file
+     * @param path the path to the entry in the configuration file
+     * @return boolean from configuration file
+     */
     public boolean getConfigBoolean(String path) {
         return configuration.getBoolean(path);
     }
     
+    /**
+     * Returns if debug mode is enabled
+     * @return boolean if debug mode is enabled
+     */
     public boolean isDebug() {
-        return configuration.getBoolean("debug");
+        return this.getConfigBoolean("debug");
     }
 }

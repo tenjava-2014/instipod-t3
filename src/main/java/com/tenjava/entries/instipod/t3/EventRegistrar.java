@@ -26,11 +26,18 @@ public class EventRegistrar {
         instance = this;
     }
     
+    /**
+     * Returns the current server instance of the EventRegistrar
+     * @return current instance of EventRegistrar
+     */
     public static EventRegistrar getInstance() {
         return instance;
     }
     
-    public void initEvents() {
+    /**
+     * Internal plugin call to register built-in events
+     */
+    protected void initEvents() {
         if (EventsCore.getInstance().getConfigBoolean("lightning_redstone.enabled")) 
             registerStormEvent(new LightningRedstoneEvent(), (100 - EventsCore.getInstance().getConfigInt("lightning_redstone.chance")));
         if (EventsCore.getInstance().getConfigBoolean("cats_and_dogs.enabled")) 
@@ -45,32 +52,68 @@ public class EventRegistrar {
         }
     }
     
+    /**
+     * Registers a storm event with the Registrar
+     * @param event the Storm event to register
+     * @param chance chance of the event happening
+     */
     public void registerStormEvent(CallablePlayerEvent event, int chance) {
         stormEvents.put(event, chance);
         EventsCore.getInstance().logEvent("Event " + event.getEventName() + " has been registered.");
     }
+    
+    /**
+     * Registers an entity event with the Registrar
+     * @param event the Entity event to register
+     * @param chance chance of the event happening
+     */
     public void registerEntityEvent(CallablePlayerEntityInteractEvent event, int chance) {
         entityEvents.put(event, chance);
         EventsCore.getInstance().logEvent("Event " + event.getEventName() + " has been registered.");
     }
+    
+    /**
+     * Registers a hunger event with the Registrar
+     * @param event the Hunger event to register
+     * @param chance chance of the event happening
+     */
     public void registerHungerEvent(CallablePlayerHungerEvent event, int chance) {
         hungerEvents.put(event, chance);
         EventsCore.getInstance().logEvent("Event " + event.getEventName() + " has been registered.");
     }
     
+    /**
+     * Unregisters or disables a storm event with the Registrar
+     * @param event the Storm event to unregister
+     */
     public void unregisterStormEvent(CallablePlayerEvent event) {
         stormEvents.remove(event);
         EventsCore.getInstance().logEvent("Event " + event.getEventName() + " has been unregistered.");
     }
+    
+    /**
+     * Unregisters or disables an entity event with the Registrar
+     * @param event the Entity event to unregister
+     */
     public void unregisterEntityEvent(CallablePlayerEntityInteractEvent event) {
         entityEvents.remove(event);
         EventsCore.getInstance().logEvent("Event " + event.getEventName() + " has been unregistered.");
     }
+    
+    /**
+     * Unregisters or disables a hunger event with the Registrar
+     * @param event the Hunger event to unregister
+     */
     public void unregisterStormEvent(CallablePlayerHungerEvent event) {
         hungerEvents.remove(event);
         EventsCore.getInstance().logEvent("Event " + event.getEventName() + " has been unregistered.");
     }
     
+    /**
+     * Calls the provided storm event to start
+     * @param event the Storm event to start
+     * @param p the player to provide
+     */
     public void callStormEvent(CallablePlayerEvent event, Player p) {
         try {
             event.call(p);
@@ -82,6 +125,12 @@ public class EventRegistrar {
         }
     }
     
+    /**
+     * Calls the provided hunger event to start
+     * @param event the Hunger event to start
+     * @param p the player to provide
+     * @param hunger the hunger level to provide
+     */
     public void callHungerEvent(CallablePlayerHungerEvent event, Player p, int hunger) {
         try {
             event.call(p, hunger);
@@ -93,6 +142,12 @@ public class EventRegistrar {
         }
     }
     
+    /**
+     * Calls the provided entity event to start
+     * @param event the Entity event to start
+     * @param p the player to provide
+     * @param e the entity to provide
+     */
     public void callEntityEvent(CallablePlayerEntityInteractEvent event, Player p, Entity e) {
         try {
             event.call(p, e);
@@ -104,6 +159,10 @@ public class EventRegistrar {
         }
     }
     
+    /**
+     * Calculates chances and calls storm events that should occur
+     * @param p the player to provide to events
+     */
     public void doStormEvents(Player p) {
         if (p.getWorld().hasStorm()) {
             for (CallablePlayerEvent event : stormEvents.keySet()) {
@@ -119,6 +178,11 @@ public class EventRegistrar {
         }
     }
     
+    /**
+     * Calculates chances and calls hunger events that should occur
+     * @param p the player to provide to events
+     * @param hunger the hunger level to provide to events
+     */
     public void doHungerEvents(Player p, int hunger) {
         for (CallablePlayerHungerEvent event : hungerEvents.keySet()) {
             int chance = Utils.getRandom(1, 100);
@@ -132,6 +196,11 @@ public class EventRegistrar {
         }
     }
     
+    /**
+     * Calculates chances and calls entity events that should occur
+     * @param p the player to provide to events
+     * @param e the entity to provide to events
+     */
     public void doEntityEvents(Player p, Entity e) {
         for (CallablePlayerEntityInteractEvent event : entityEvents.keySet()) {
             int chance = Utils.getRandom(1, 100);
@@ -145,10 +214,18 @@ public class EventRegistrar {
         }
     }
     
+    /**
+     * Registers an InstiEventListener to receive events
+     * @param l the listener to register
+     */
     public void registerListener(InstiEventListener l) {
         listeners.add(l);
     }
     
+    /**
+     * Unregisters an InstiEventListener to stop receiving events
+     * @param l the listener to unregister
+     */
     public void unregisterListener(InstiEventListener l) {
         listeners.remove(l);
     }
