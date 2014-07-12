@@ -220,6 +220,7 @@ public class EventRegistrar {
      */
     public void registerListener(InstiEventListener l) {
         listeners.add(l);
+        l.initEvents();
     }
     
     /**
