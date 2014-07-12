@@ -1,20 +1,26 @@
-debug: false
+debug: true
 log_events: true
 global:
     frequency: 600
     start_delay: 200
 lightning_redstone:
-    enabled: true
+    enabled: false
     chance: 30
     overload_chance: 8
     overload_power: 2
 cats_and_dogs:
-    enabled: true
+    enabled: false
     chance: 10
     event_length: 10
     spawn_height: 50
 angry_chicken:
-    enabled: true
+    enabled: false
     chance: 60
     event_length: 10
     bomb_height: 15
+vomit:
+    enabled: true
+    chance: 100
+    event_length: 10
+    hunger_level: 10
+    effect_strength: 1
