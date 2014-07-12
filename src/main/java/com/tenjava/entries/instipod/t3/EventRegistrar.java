@@ -3,6 +3,7 @@ package com.tenjava.entries.instipod.t3;
 import com.tenjava.entries.instipod.t3.api.CallablePlayerHungerEvent;
 import com.tenjava.entries.instipod.t3.api.CallablePlayerEvent;
 import com.tenjava.entries.instipod.t3.api.CallablePlayerEntityInteractEvent;
+import com.tenjava.entries.instipod.t3.api.Utils;
 import com.tenjava.entries.instipod.t3.events.AngryChickenEvent;
 import com.tenjava.entries.instipod.t3.events.CatsandDogsEvent;
 import com.tenjava.entries.instipod.t3.events.LightningRedstoneEvent;
@@ -64,9 +65,8 @@ public class EventRegistrar {
     
     public void doStormEvents(Player p) {
         if (p.getWorld().hasStorm()) {
-            Random random = new Random();
             for (CallablePlayerEvent event : stormEvents.keySet()) {
-                int chance = random.nextInt(100) + 1;
+                int chance = Utils.getRandom(1, 100);
                 if (chance >= stormEvents.get(event)) {
                     EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": Executing event " + event.getEventName() + " on player " + p.getName() + ", result " + chance + " needed " + stormEvents.get(event) + ".");
                     EventsCore.getInstance().logEvent("Player " + p.getName() + " in world " + p.getWorld().getName() + ", executing event " + event.getEventName() + ".");
@@ -79,9 +79,8 @@ public class EventRegistrar {
     }
     
     public void doHungerEvents(Player p, int hunger) {
-        Random random = new Random();
         for (CallablePlayerHungerEvent event : hungerEvents.keySet()) {
-            int chance = random.nextInt(100) + 1;
+            int chance = Utils.getRandom(1, 100);
             if (chance >= hungerEvents.get(event)) {
                 EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": Executing event " + event.getEventName() + " on player " + p.getName() + ", result " + chance + " needed " + hungerEvents.get(event) + ".");
                 EventsCore.getInstance().logEvent("Player " + p.getName() + " in world " + p.getWorld().getName() + ", executing event " + event.getEventName() + ".");
@@ -93,9 +92,8 @@ public class EventRegistrar {
     }
     
     public void doEntityEvents(Player p, Entity e) {
-        Random random = new Random();
         for (CallablePlayerEntityInteractEvent event : entityEvents.keySet()) {
-            int chance = random.nextInt(100) + 1;
+            int chance = Utils.getRandom(1, 100);
             if (chance >= entityEvents.get(event)) {
                 EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": Executing event " + event.getEventName() + " on player " + p.getName() + ", result " + chance + " needed " + entityEvents.get(event) + ".");
                 EventsCore.getInstance().logEvent("Player " + p.getName() + " in world " + p.getWorld().getName() + ", executing event " + event.getEventName() + ".");

@@ -2,6 +2,7 @@ package com.tenjava.entries.instipod.t3.events;
 
 import com.tenjava.entries.instipod.t3.api.CallablePlayerEvent;
 import com.tenjava.entries.instipod.t3.EventsCore;
+import com.tenjava.entries.instipod.t3.api.Utils;
 import java.util.ArrayList;
 import java.util.Random;
 import org.bukkit.Location;
@@ -21,8 +22,7 @@ public class LightningRedstoneEvent implements CallablePlayerEvent {
             ArrayList<Block> blocks = getPossibleBlocks(ofplayer.getBlock(), 25);
             if (blocks.size() > 0) {
                 EventsCore.getInstance().debug("World " + p.getWorld().getName() + ": LightningRedstoneEvent for player " + p.getName() + ", found " + blocks.size() + " possible targets.");
-                Random random = new Random();
-                int tostrike = random.nextInt(blocks.size());
+                int tostrike = Utils.getRandom(blocks.size());
                 Block strike = blocks.get(tostrike);
                 ofplayer.getWorld().strikeLightning(strike.getLocation());
                 strike.setType(Material.REDSTONE_TORCH_ON);
@@ -91,8 +91,7 @@ public class LightningRedstoneEvent implements CallablePlayerEvent {
     }
     
     public static void removeStruck() {
-        Random random = new Random();
-        int result = random.nextInt(100) + 1;
+        int result = Utils.getRandom(1, 100);
         struck.setType(Material.REDSTONE_WIRE);
         if (result >= (100 - EventsCore.getInstance().getConfigInt("lightning_redstone.overload_chance"))) {
             float power = EventsCore.getInstance().getConfigInt("lightning_redstone.overload_power") * 1F;
