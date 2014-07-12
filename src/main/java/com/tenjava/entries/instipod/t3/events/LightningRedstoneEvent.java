@@ -4,7 +4,6 @@ import com.tenjava.entries.instipod.t3.api.CallablePlayerEvent;
 import com.tenjava.entries.instipod.t3.EventsCore;
 import com.tenjava.entries.instipod.t3.api.Utils;
 import java.util.ArrayList;
-import java.util.Random;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;

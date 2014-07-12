@@ -1,7 +1,7 @@
 package com.tenjava.entries.instipod.t3.events;
 
-import com.tenjava.entries.instipod.t3.api.CallablePlayerEntityInteractEvent;
 import com.tenjava.entries.instipod.t3.EventsCore;
+import com.tenjava.entries.instipod.t3.api.CallablePlayerEntityInteractEvent;
 import org.bukkit.Material;
 import org.bukkit.entity.Chicken;
 import org.bukkit.entity.Entity;

@@ -1,9 +1,6 @@
 package com.tenjava.entries.instipod.t3;
 
-import com.tenjava.entries.instipod.t3.EventRegistrar;
-import com.tenjava.entries.instipod.t3.EventsCore;
 import com.tenjava.entries.instipod.t3.api.Utils;
-import java.util.Random;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
