@@ -1,13 +1,13 @@
-debug: true
+debug: false
 lightningredstone:
-    enabled: false
+    enabled: true
     try-frequency: 600
     start-delay: 200
-    run-chance: 100
+    run-chance: 10
     overload-chance: 100
     overload-power: 3
 catsanddogs:
     enabled: true
-    run-chance: 100
-    event-length: 10
-    spawn-height: 30
+    run-chance: 45
+    event-length: 15
+    spawn-height: 45
