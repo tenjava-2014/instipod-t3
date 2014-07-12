@@ -25,8 +25,19 @@ Maven will download all required dependencies and build a ready-for-use plugin p
 
 ---------------------------------------
 
-Usage
------
+Features
+--------
+
+- During a storm, lightning has a chance to hit nearby redstone wire and cause a (unwanted?) pulse.
+- During a storm, there is a chance it can start raining "Cats and Dogs."
+- Hitting a chicken might anger it enough to start bombing you with anvils.
+- Running out of food might cause you to start vomiting dirt everywhere.
+- - Restoring your food level above the set level will stop the effect
+- An open API for more events!
+- - Scroll down to see the developer documentation!
+
+Plugin Usage
+------------
 
 After installing the plugin JAR in your server's plugins folder, no extra work is required.  The plugin will load default values in the configuration file, which should set you up with random events right away!
 If you want to customize some of the event factors, they are provided in the config.yml file created on first server run.  Below is information on each of the configuration options:
@@ -34,7 +45,7 @@ If you want to customize some of the event factors, they are provided in the con
 ```
 debug: false
 ```
-This is a boolean entry mosting for me (the plugin author) to show plugin debugging message.  You are free to enable this and view the extra messages too, however, it does generate quite a bit of output.
+This is a boolean entry mostly for me (the plugin author) to show plugin debugging message.  You are free to enable this and view the extra messages too, however, it does generate quite a bit of output.
 
 ```
 log_events: true
@@ -99,3 +110,54 @@ This is an integer entry that controls the length of the Raining Cats and Dogs E
 spawn_height: 45
 ```
 This is an integer entry that controls the height above the player in which the animals are spawned (in blocks).
+
+
+### Angry_Chicken Section
+
+```
+enabled: true
+```
+This is a boolean entry that controls whether or not the Angry Chicken Event is enabled.
+
+```
+chance: 20
+```
+This is an integer entry that controls the chance of the event occurring (out of 100).
+
+```
+event_length: 10
+```
+This is an integer entry that controls the length of the Angry Chicken Event (in seconds).
+
+```
+bomb_height: 15
+```
+This is an integer entry that controls the height above the player in which the chicken spawns Anvils to fall (in blocks).
+
+
+### Vomit Section
+
+```
+enabled: true
+```
+This is a boolean entry that controls whether or not the Vomit Event is enabled.
+
+```
+chance: 5
+```
+This is an integer entry that controls the chance of the event occurring (out of 100).
+
+```
+event_length: 10
+```
+This is an integer entry that controls the length of the Vomit Event (in seconds).
+
+```
+hunger_level: 3
+```
+This is an integer entry that controls the hunger level at which the event can occur (Full Hunger is equal to 20);
+
+```
+effect_strength: 2
+```
+This is an integer entry that controls the strength of the Weakness and Hunger effects placed on the player when vomiting.
