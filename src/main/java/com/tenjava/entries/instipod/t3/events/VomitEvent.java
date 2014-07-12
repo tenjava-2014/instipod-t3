@@ -46,7 +46,7 @@ class VomitAttackTask extends BukkitRunnable {
     public void run() {
         if (startTime == 0) startTime = System.currentTimeMillis();
         long finishTime = startTime + (HashtagLifeCore.getInstance().getConfigInt("vomit.event_length") * 1000);
-        if ((finishTime - System.currentTimeMillis()) > 0 && p.getFoodLevel() > HashtagLifeCore.getInstance().getConfigInt("vomit.hunger_level")) {
+        if ((finishTime - System.currentTimeMillis()) > 0 && p.getFoodLevel() <= HashtagLifeCore.getInstance().getConfigInt("vomit.hunger_level")) {
             Item dropped = p.getWorld().dropItem(p.getEyeLocation(), new ItemStack(Material.DIRT, 1));
             dropped.setVelocity(p.getEyeLocation().getDirection().normalize());
         } else {
