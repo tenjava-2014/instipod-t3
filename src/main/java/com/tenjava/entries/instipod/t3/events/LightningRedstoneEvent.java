@@ -38,6 +38,7 @@ public class LightningRedstoneEvent implements CallablePlayerEvent {
             while (y <= radius) {
                 while (z <= radius) {
                     Block b = starting.getRelative(x, y, z);
+                    System.out.println("debug // Found block " + x + "," + y + "," + z + ": " + b.getType().name());
                     if (b.getType().equals(Material.REDSTONE_WIRE) || b.getType().equals(Material.REDSTONE) || b.getType().equals(Material.REDSTONE_BLOCK)) {
                         output.add(b);
                     }
