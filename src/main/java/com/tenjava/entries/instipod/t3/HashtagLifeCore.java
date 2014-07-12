@@ -16,10 +16,13 @@ public class HashtagLifeCore extends JavaPlugin {
     public void onEnable() {
         instance = this;
         EventListener listener = new EventListener(this);
-        registrar = new EventRegistrar();
-        registrar.initEvents();
         
         configuration = getConfig();
+        configuration.options().copyDefaults(true);
+        saveConfig();
+        
+        registrar = new EventRegistrar();
+        registrar.initEvents();
         
         for (World w : getServer().getWorlds()) {
             debug("World " + w.getName() + " is already storming, starting Bukkit Task.");
@@ -48,6 +51,10 @@ public class HashtagLifeCore extends JavaPlugin {
     
     public int getConfigInt(String path) {
         return configuration.getInt(path);
+    }
+    
+    public boolean getConfigBoolean(String path) {
+        return configuration.getBoolean(path);
     }
     
     public boolean isDebug() {
