@@ -94,8 +94,8 @@ public class LightningRedstoneEvent implements CallablePlayerEvent {
         Random random = new Random();
         int result = random.nextInt(100) + 1;
         struck.setType(Material.REDSTONE_WIRE);
-        if (result >= (100 - HashtagLifeCore.getInstance().getConfigInt("lightningredstone.overload-chance"))) {
-            float power = HashtagLifeCore.getInstance().getConfigInt("lightningredstone.overload-power") * 1F;
+        if (result >= (100 - HashtagLifeCore.getInstance().getConfigInt("lightning_redstone.overload_chance"))) {
+            float power = HashtagLifeCore.getInstance().getConfigInt("lightning_redstone.overload_power") * 1F;
             struck.getWorld().createExplosion(struck.getLocation().getBlockX(), struck.getLocation().getBlockY(), struck.getLocation().getBlockZ(), power, true, true);
         }
         struck = null;
