@@ -27,6 +27,7 @@ public class WeatherRunnable extends BukkitRunnable {
                 HashtagLifeCore.getInstance().debug("There are no players in world " + world.getName() + ", so skipping task.");
             }
         } else {
+            HashtagLifeCore.getInstance().debug("World " + world.getName() + " has stopped storming, so canceling task.");
             this.cancel();
         }
     }

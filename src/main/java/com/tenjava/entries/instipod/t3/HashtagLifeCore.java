@@ -33,7 +33,7 @@ public class HashtagLifeCore extends JavaPlugin {
     }
     
     public void log(Level level, String message) {
-        getServer().getLogger().log(level, message);
+        getServer().getLogger().log(level, "[" + getDescription().getName() + "] " + message);
     }
     
     public void debug(String message) {

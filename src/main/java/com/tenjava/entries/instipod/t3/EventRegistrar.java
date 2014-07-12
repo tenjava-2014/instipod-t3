@@ -36,7 +36,7 @@ public class EventRegistrar {
             for (CallablePlayerEvent event : stormEvents.keySet()) {
                 int chance = random.nextInt(100) + 1;
                 if (chance >= stormEvents.get(event)) {
-                    HashtagLifeCore.getInstance().debug("World " + p.getWorld().getName() + ": Executing event " + event.toString() + "on player " + p.getName() + ".");
+                    HashtagLifeCore.getInstance().debug("World " + p.getWorld().getName() + ": Executing event " + event.toString() + " on player " + p.getName() + ".");
                     callEvent(event, p);
                 }
             }
