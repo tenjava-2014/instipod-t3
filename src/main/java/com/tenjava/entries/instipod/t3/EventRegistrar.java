@@ -19,7 +19,7 @@ public class EventRegistrar {
     }
     
     public void initEvents() {
-        stormEvents.put(new LightningRedstoneEvent(), 0);
+        stormEvents.put(new LightningRedstoneEvent(), (100 - HashtagLifeCore.getInstance().getConfigInt("lightningredstone.run-chance")));
     }
     
     public void callEvent(CallablePlayerEvent event, Player p) {
