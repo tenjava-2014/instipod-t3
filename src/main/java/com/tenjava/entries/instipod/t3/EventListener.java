@@ -1,11 +1,14 @@
 package com.tenjava.entries.instipod.t3;
 
 import com.tenjava.entries.instipod.t3.events.LightningRedstoneEvent;
+import com.tenjava.entries.instipod.t3.events.WeatherRunnable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockRedstoneEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.event.weather.WeatherChangeEvent;
+import org.bukkit.scheduler.BukkitTask;
 
 public class EventListener implements Listener {
     private HashtagLifeCore plugin;
@@ -31,10 +34,11 @@ public class EventListener implements Listener {
         
     }
     
-    @EventHandler(priority = EventPriority.LOW)
-    public void onBlockRedstoneEvent(BlockRedstoneEvent event) {
-        if (LightningRedstoneEvent.isBlockStruck(event.getBlock())) {
-            //event.setNewCurrent(15);
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void onWeatherChange(WeatherChangeEvent event) {
+        if (event.toWeatherState()) {
+            System.out.println("debug//weather state has changed to true");
+            BukkitTask runnable = new WeatherRunnable(event.getWorld()).runTaskTimer(plugin, 100, 600);
         }
     }
 }

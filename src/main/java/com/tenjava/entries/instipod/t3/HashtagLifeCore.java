@@ -5,11 +5,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class HashtagLifeCore extends JavaPlugin {
     private static HashtagLifeCore instance;
+    private EventRegistrar registrar;
     
     @Override
     public void onEnable() {
         instance = this;
         EventListener listener = new EventListener(this);
+        registrar = new EventRegistrar();
+        registrar.initEvents();
     }
     
     @Override
