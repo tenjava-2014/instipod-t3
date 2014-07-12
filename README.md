@@ -161,3 +161,123 @@ This is an integer entry that controls the hunger level at which the event can o
 effect_strength: 2
 ```
 This is an integer entry that controls the strength of the Weakness and Hunger effects placed on the player when vomiting.
+
+
+Developer Documentation
+-----------------------
+
+Using the open API in InstiEvents, you can add custom events and create listeners to monitor when events occur.
+
+### Creating a listener
+
+```
+import com.tenjava.entries.instipod.t3.api.InstiEventListener;
+import com.tenjava.entries.instipod.t3.api.CallableEvent;
+
+public class ExampleListener implements InstiEventListener {
+
+public void initEvents() {
+//register your custom events (if any) in this method, as shown below
+}
+
+public void eventOccured(CallableEvent event, String name) {
+//this method will be called when any event occurs, with event being the event class, and name being the name of the event.
+}
+
+}
+```
+
+Above is an example listener for events.  Please note, both methods are required even if one or more methods are blank.
+After you have a Listener made, you must register the listener with InstiEvents like shown below:
+
+```
+EventRegistrar.getInstance().registerListener(new ExampleListener());
+```
+(Don't forget to import com.tenjava.entries.instipod.t3.EventRegistrar!)
+
+Placing that register line in your plugin onEnable() method is the recommended place.
+
+
+### Creating Custom Events
+
+To create a custom event, create a new class implementing:
+- CallablePlayerEntityInteractEvent for an entity event to execute on Entity Damage by Player.
+- CallablePlayerEvent for a storm event to randomly execute during a storm.
+- CallablePlayerHungerEvent for a hunger event to randomly occur when hunger changes.
+
+A basic hunger event looks like this:
+```
+import com.tenjava.entries.instipod.t3.api.CallablePlayerHungerEvent;
+import org.bukkit.entity.Player;
+
+public class ExampleEvent implements CallablePlayerHungerEvent {
+    
+    @Override
+    public void call(Player p, int hunger) throws Exception {
+        //this method is called when the event should occur
+        //player p is the player object who this event is occuring to
+        //int hunger is the player's hunger level at the time of the event starting
+    }
+
+    @Override
+    public String getEventName() {
+        //this method should always only return the name of the event
+        return "ExampleEvent";
+    }
+
+}
+```
+
+A basic storm event looks like this:
+```
+import com.tenjava.entries.instipod.t3.api.CallablePlayerEvent;
+import org.bukkit.entity.Player;
+
+public class ExampleEvent implements CallablePlayerEvent {
+    
+    @Override
+    public void call(Player p) throws Exception {
+        //this method is called when the event should occur
+        //player p is the player object who this event is occuring to
+    }
+
+    @Override
+    public String getEventName() {
+        //this method should always only return the name of the event
+        return "ExampleEvent";
+    }
+
+}
+```
+
+And, a basic entity event looks like this:
+```
+import com.tenjava.entries.instipod.t3.api.CallablePlayerEntityInteractEvent;
+import org.bukkit.entity.Player;
+
+public class ExampleEvent implements CallablePlayerEntityInteractEvent {
+    
+    @Override
+    public void call(Player p, Entity e) throws Exception {
+        //this method is called when the event should occur
+        //player p is the player object who this event is occuring to
+        //entity e is the entity object who the player damaged
+    }
+
+    @Override
+    public String getEventName() {
+        //this method should always only return the name of the event
+        return "ExampleEvent";
+    }
+
+}
+```
+
+After you have the event class created, you now need to register the event with a register line inside your initEvents() method in an InstiEventsListener, like so:
+```
+EventRegistrar.getInstance().registerStormEvent(new ExampleEvent(), 100); //For a storm event: First arugment is the event class, and the second is the percent chance of it occuring
+EventRegistrar.getInstance().registerHungerEvent(new ExampleEvent(), 100); //For a hunger event: First arugment is the event class, and the second is the percent chance of it occuring
+EventRegistrar.getInstance().registerEntityEvent(new ExampleEvent(), 100); //For an entity event: First arugment is the event class, and the second is the percent chance of it occuring
+```
+
+That's it!
