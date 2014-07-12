@@ -4,12 +4,17 @@ global:
     frequency: 600
     start_delay: 200
 lightning_redstone:
-    enabled: true
+    enabled: false
     chance: 100
     overload_chance: 100
     overload_power: 3
 cats_and_dogs:
-    enabled: true
+    enabled: false
     chance: 100
     event_length: 15
     spawn_height: 45
+angry_chicken:
+    enabled: true
+    chance: 100
+    event_length: 10
+    bomb_height: 10

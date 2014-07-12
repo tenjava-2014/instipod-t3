@@ -39,10 +39,10 @@ class CatsandDogsTask extends BukkitRunnable {
     @Override
     public void run() {
         if (startTime == 0) startTime = System.currentTimeMillis();
-        long finishTime = startTime + (HashtagLifeCore.getInstance().getConfigInt("catsanddogs.event-length") * 1000);
+        long finishTime = startTime + (HashtagLifeCore.getInstance().getConfigInt("cats_and_dogs.event_length") * 1000);
         if ((finishTime - System.currentTimeMillis()) > 0 && player.getWorld().hasStorm()) {
             Location ofp = player.getLocation();
-            ofp.add(0, HashtagLifeCore.getInstance().getConfigInt("catsanddogs.spawn-height"), 2);
+            ofp.add(0, HashtagLifeCore.getInstance().getConfigInt("cats_and_dogs.spawn_height"), 2);
             entities.add(ofp.getWorld().spawnEntity(ofp, EntityType.WOLF));
             ofp.add(0, 0, -4);
             entities.add(ofp.getWorld().spawnEntity(ofp, EntityType.OCELOT));
