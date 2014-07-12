@@ -1,3 +1,4 @@
-name: instipod-t3
-main: com.tenjava.entries.instipod.t3.TenJava
+name: HashtagLife
+main: com.tenjava.entries.instipod.t3.HashtagLifeCore
 version: '${project.version}'
+description: instipod's plugin
