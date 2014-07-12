@@ -32,9 +32,9 @@ Features
 - During a storm, there is a chance it can start raining "Cats and Dogs."
 - Hitting a chicken might anger it enough to start bombing you with anvils.
 - Running out of food might cause you to start vomiting dirt everywhere.
-..* Restoring your food level above the set level will stop the effect
+  * Restoring your food level above the set level will stop the effect
 - An open API for more events!
-..* Scroll down to see the developer documentation!
+  * Scroll down to see the developer documentation!
 
 Plugin Usage
 ------------
