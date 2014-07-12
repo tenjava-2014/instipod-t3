@@ -18,10 +18,14 @@ public class LightningRedstoneEvent implements CallablePlayerEvent {
         if (ofplayer.getWorld().hasStorm()) {
             ArrayList<Block> blocks = getPossibleBlocks(ofplayer.getBlock(), 25);
             blocks.addAll(getPossibleBlocks(ofplayer.getBlock(), -25));
-            Random random = new Random();
-            int tostrike = random.nextInt(blocks.size());
-            p.sendMessage("debug//" + blocks.size() + " possible targets found");
-            ofplayer.getWorld().strikeLightning(blocks.get(tostrike).getLocation());
+            if (blocks.size() > 0) {
+                Random random = new Random();
+                int tostrike = random.nextInt(blocks.size());
+                p.sendMessage("debug//" + blocks.size() + " possible targets found");
+                ofplayer.getWorld().strikeLightning(blocks.get(tostrike).getLocation());
+            } else {
+                p.sendMessage("debug// no targets found");
+            }
         }
     }
     

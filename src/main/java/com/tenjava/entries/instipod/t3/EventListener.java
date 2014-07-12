@@ -25,6 +25,7 @@ public class EventListener implements Listener {
                 //problem
                 ex.printStackTrace();
             }
+            event.setCancelled(true);
         }
         
     }
