@@ -40,6 +40,11 @@ public class LightningRedstoneEvent implements CallablePlayerEvent {
         }
     }
     
+    @Override
+    public String getEventName() {
+        return "LightningRedstoneEvent";
+    }
+    
     private ArrayList<Block> getPossibleBlocks(Block starting, int radius) {
         ArrayList<Block> output = new ArrayList<Block>();
         int x = 0;

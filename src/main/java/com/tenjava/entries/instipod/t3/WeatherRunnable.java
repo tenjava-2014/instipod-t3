@@ -1,4 +1,4 @@
-package com.tenjava.entries.instipod.t3.events;
+package com.tenjava.entries.instipod.t3;
 
 import com.tenjava.entries.instipod.t3.EventRegistrar;
 import com.tenjava.entries.instipod.t3.HashtagLifeCore;

@@ -1,14 +1,15 @@
-debug: false
+debug: true
+log_events: true
 global:
-    try-frequency: 600
-    start-delay: 200
-lightningredstone:
+    frequency: 600
+    start_delay: 200
+lightning_redstone:
     enabled: true
-    run-chance: 10
-    overload-chance: 100
-    overload-power: 3
-catsanddogs:
+    chance: 100
+    overload_chance: 100
+    overload_power: 3
+cats_and_dogs:
     enabled: true
-    run-chance: 45
-    event-length: 15
-    spawn-height: 45
+    chance: 100
+    event_length: 15
+    spawn_height: 45

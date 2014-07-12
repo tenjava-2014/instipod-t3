@@ -1,6 +1,5 @@
 package com.tenjava.entries.instipod.t3;
 
-import com.tenjava.entries.instipod.t3.events.WeatherRunnable;
 import java.util.logging.Level;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -26,7 +25,7 @@ public class HashtagLifeCore extends JavaPlugin {
         
         for (World w : getServer().getWorlds()) {
             debug("World " + w.getName() + " is already storming, starting Bukkit Task.");
-            BukkitTask runnable = new WeatherRunnable(w).runTaskTimer(this, getConfigInt("global.start-delay"), getConfigInt("global.try-frequency"));
+            BukkitTask runnable = new WeatherRunnable(w).runTaskTimer(this, getConfigInt("global.start_delay"), getConfigInt("global.frequency"));
         }
     }
     
@@ -37,6 +36,12 @@ public class HashtagLifeCore extends JavaPlugin {
     
     public void log(Level level, String message) {
         getServer().getLogger().log(level, "[" + getDescription().getName() + "] " + message);
+    }
+    
+    public void logEvent(String message) {
+        if (getConfigBoolean("log_events")) {
+            log(Level.INFO, "[E] " + message);
+        }
     }
     
     public void debug(String message) {

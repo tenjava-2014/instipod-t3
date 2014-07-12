@@ -4,4 +4,5 @@ import org.bukkit.entity.Player;
 
 public interface CallablePlayerEvent {
     public void call(Player p) throws Exception;
+    public String getEventName();
 }

@@ -20,10 +20,10 @@ public class EventRegistrar {
     }
     
     public void initEvents() {
-        if (HashtagLifeCore.getInstance().getConfigBoolean("lightningredstone.enabled")) 
-            stormEvents.put(new LightningRedstoneEvent(), (100 - HashtagLifeCore.getInstance().getConfigInt("lightningredstone.run-chance")));
-        if (HashtagLifeCore.getInstance().getConfigBoolean("catsanddogs.enabled")) 
-            stormEvents.put(new CatsandDogsEvent(), (100 - HashtagLifeCore.getInstance().getConfigInt("catsanddogs.run-chance")));
+        if (HashtagLifeCore.getInstance().getConfigBoolean("lightning_redstone.enabled")) 
+            stormEvents.put(new LightningRedstoneEvent(), (100 - HashtagLifeCore.getInstance().getConfigInt("lightning_redstone.chance")));
+        if (HashtagLifeCore.getInstance().getConfigBoolean("cats_and_dogs.enabled")) 
+            stormEvents.put(new CatsandDogsEvent(), (100 - HashtagLifeCore.getInstance().getConfigInt("cats_and_dogs.chance")));
     }
     
     public void callEvent(CallablePlayerEvent event, Player p) {
@@ -40,10 +40,11 @@ public class EventRegistrar {
             for (CallablePlayerEvent event : stormEvents.keySet()) {
                 int chance = random.nextInt(100) + 1;
                 if (chance >= stormEvents.get(event)) {
-                    HashtagLifeCore.getInstance().debug("World " + p.getWorld().getName() + ": Executing event " + event.toString() + " on player " + p.getName() + ", result " + chance + " needed " + stormEvents.get(event) + ".");
+                    HashtagLifeCore.getInstance().debug("World " + p.getWorld().getName() + ": Executing event " + event.getEventName() + " on player " + p.getName() + ", result " + chance + " needed " + stormEvents.get(event) + ".");
+                    HashtagLifeCore.getInstance().logEvent("Player " + p.getName() + " in world " + p.getWorld().getName() + ", executing event " + event.getEventName() + ".");
                     callEvent(event, p);
                 } else {
-                    HashtagLifeCore.getInstance().debug("World " + p.getWorld().getName() + ": Skipping event " + event.toString() + " on player " + p.getName() + ", result " + chance + " needed " + stormEvents.get(event) + ".");
+                    HashtagLifeCore.getInstance().debug("World " + p.getWorld().getName() + ": Skipping event " + event.getEventName() + " on player " + p.getName() + ", result " + chance + " needed " + stormEvents.get(event) + ".");
                 }
             }
         }

@@ -21,6 +21,11 @@ public class CatsandDogsEvent implements CallablePlayerEvent {
         }
     }
 
+    @Override
+    public String getEventName() {
+        return "CatsandDogsEvent";
+    }
+
 }
 class CatsandDogsTask extends BukkitRunnable {
     private long startTime = 0;
