@@ -13,7 +13,7 @@ public class AngryChickenEvent implements CallablePlayerEntityInteractEvent {
 
     @Override
     public void call(Player p, Entity e) throws Exception {
-        if (e instanceof Chicken) {
+        if (e instanceof Chicken && !e.isDead()) {
             HashtagLifeCore.getInstance().debug("AngryChickenAttackTask has started with target " + p.getName() + ".");
             BukkitTask runnable = new AngryChickenAttackTask(p, e).runTaskTimer(HashtagLifeCore.getInstance(), 0, 20);
         }
